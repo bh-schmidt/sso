@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.572
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.452
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Api", "1 - Api", "{FA424D3E-FDEA-456D-BC61-478A565887DB}"
 EndProject
@@ -13,11 +13,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.1 - Data", "3.1 - Data", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.2 - CrossCutting", "3.2 - CrossCutting", "{FDBF148A-23D8-48FF-A44C-7AF0936EF89B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SSO.Domain", "SSO.Domain\SSO.Domain.csproj", "{3A0CDA38-6BD5-4B5B-BD65-F9FF72D4CE09}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SSO.Domain", "SSO.Domain\SSO.Domain.csproj", "{3A0CDA38-6BD5-4B5B-BD65-F9FF72D4CE09}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Tests", "4 - Tests", "{DBAFF815-86B3-4D00-B489-6C7B9DA4831A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SSO.Infra.Data", "SSO.Infra.Data\SSO.Infra.Data.csproj", "{D2424BDB-3CAD-4B8D-9061-CB6E96329739}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SSO.Infra.Data", "SSO.Infra.Data\SSO.Infra.Data.csproj", "{D2424BDB-3CAD-4B8D-9061-CB6E96329739}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SSO.Domain.Tests", "SSO.Domain.Tests\SSO.Domain.Tests.csproj", "{3430A014-5331-4550-BBB2-06EFC992E251}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{D2424BDB-3CAD-4B8D-9061-CB6E96329739}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D2424BDB-3CAD-4B8D-9061-CB6E96329739}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D2424BDB-3CAD-4B8D-9061-CB6E96329739}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3430A014-5331-4550-BBB2-06EFC992E251}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3430A014-5331-4550-BBB2-06EFC992E251}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3430A014-5331-4550-BBB2-06EFC992E251}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3430A014-5331-4550-BBB2-06EFC992E251}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -42,6 +48,7 @@ Global
 		{FDBF148A-23D8-48FF-A44C-7AF0936EF89B} = {08EC0851-1B60-441E-B030-A9AEA891A4DA}
 		{3A0CDA38-6BD5-4B5B-BD65-F9FF72D4CE09} = {D590CABC-2BB6-4AC9-9536-7F09D541F7C3}
 		{D2424BDB-3CAD-4B8D-9061-CB6E96329739} = {2B6876B3-9CBE-4150-B248-26C814ABDD01}
+		{3430A014-5331-4550-BBB2-06EFC992E251} = {DBAFF815-86B3-4D00-B489-6C7B9DA4831A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {823EFAA8-FD50-4964-AE56-E9796B892FE4}
