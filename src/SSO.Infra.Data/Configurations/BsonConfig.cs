@@ -1,6 +1,4 @@
-﻿using SSO.Infra.Data.Configurations.Users;
-
-namespace SSO.Infra.Data.Configurations
+﻿namespace SSO.Infra.Data.Configurations
 {
     public static class BsonConfig
     {

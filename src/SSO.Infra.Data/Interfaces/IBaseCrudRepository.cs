@@ -1,8 +1,8 @@
-﻿using SSO.Domain.Models;
+using SSO.Domain.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace SSO.Domain.Interfaces.Repositories
+namespace SSO.Infra.Data.Interfaces
 {
     public interface IBaseCrudRepository<TModel> where TModel : BaseModel
     {

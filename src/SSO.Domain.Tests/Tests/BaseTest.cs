@@ -1,8 +1,8 @@
-﻿using FluentValidation;
+using FluentValidation;
 using NUnit.Framework;
 using System.Diagnostics.CodeAnalysis;
 
-namespace SSO.Domain.Tests
+namespace SSO.Domain.Tests.Tests
 {
     [TestFixture]
     [ExcludeFromCodeCoverage]

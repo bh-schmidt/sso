@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using SSO.Domain.Interfaces.Repositories;
+﻿using MongoDB.Driver;
 using SSO.Domain.Models;
-using MongoDB.Driver;
+using SSO.Infra.Data.Interfaces;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace SSO.Infra.Data.Repositories
 {

@@ -1,8 +1,8 @@
-﻿using NUnit.Framework;
+using NUnit.Framework;
 using SSO.Domain.Models.Users;
 using SSO.Domain.Tests.Helpers.ExtensionMethods;
 
-namespace SSO.Domain.Tests.Contracts.Users
+namespace SSO.Domain.Tests.Tests.Contracts.Users
 {
     public class InsertUserContractTest : BaseTest
     {

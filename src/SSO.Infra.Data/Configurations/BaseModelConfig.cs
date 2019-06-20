@@ -1,10 +1,10 @@
-﻿using MongoDB.Bson;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.IdGenerators;
 using MongoDB.Bson.Serialization.Serializers;
 using SSO.Domain.Models;
 
-namespace SSO.Infra.Data.Configurations.Users
+namespace SSO.Infra.Data.Configurations
 {
     public static class BaseModelConfig
     {

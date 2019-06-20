@@ -1,12 +1,12 @@
-﻿using System.Threading.Tasks;
-using SSO.Domain.Interfaces.Services.Users;
+﻿using SSO.Domain.Interfaces.Users;
 using SSO.Domain.Models.Users;
+using System.Threading.Tasks;
 
 namespace SSO.Domain.Services.Users
 {
     public class InsertUserService : IInsertUserService
     {
-        public Task Insert(User user)
+        public Task<User> Insert(User user)
         {
             throw new System.NotImplementedException();
         }
