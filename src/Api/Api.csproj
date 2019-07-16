@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SSO.Domain\SSO.Domain.csproj" />
+    <ProjectReference Include="..\SSO.Infra.AppConfiguration\SSO.Infra.AppConfiguration.csproj" />
     <ProjectReference Include="..\SSO.Infra.ServiceLocator\SSO.Infra.ServiceLocator.csproj" />
   </ItemGroup>
 

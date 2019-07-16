@@ -1,5 +1,7 @@
 ﻿using MongoDB.Driver;
-using SSO.Domain.Models;
+using SSO.Domain.Models.Entities;
+using SSO.Infra.AppConfiguration;
+using SSO.Infra.ServiceLocator;
 
 namespace SSO.Infra.Data.Repositories
 {
@@ -9,10 +11,10 @@ namespace SSO.Infra.Data.Repositories
         protected readonly IMongoDatabase mongoDatabase;
         protected readonly IMongoCollection<TModel> collection;
 
-        protected BaseRepository(string collectionName)
+        protected BaseRepository(string collectionName, IServiceLocator serviceLocator)
         {
-            mongoClient = new MongoClient("");
-            mongoDatabase = mongoClient.GetDatabase("");
+            mongoClient = serviceLocator.Resolve<IMongoClient>();
+            mongoDatabase = mongoClient.GetDatabase(AppSettings.UserCollectionName);
             collection = mongoDatabase.GetCollection<TModel>(collectionName);
         }
     }

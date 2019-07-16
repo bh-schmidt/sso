@@ -1,13 +1,14 @@
-﻿using SSO.Domain.Models;
+﻿using SSO.Domain.Models.Entities;
 using System.Linq;
 
-namespace SSO.Domain.Tests.Helpers.ExtensionMethods
+namespace SSO.Tests.Shared.Helpers.ExtensionMethods
 {
     public static class BaseModelExtensions
     {
         public static int CountErrors(this BaseModel baseModel)
         {
-            return baseModel.ValidationResult.Errors.Count;
+            var count = baseModel?.ValidationResult?.Errors?.Count;
+            return count.HasValue ? count.Value : 0;
         }
 
         public static bool HasError(this BaseModel baseModel, string message)

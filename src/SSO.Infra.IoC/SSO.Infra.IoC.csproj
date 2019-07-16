@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SSO.Domain\SSO.Domain.csproj" />
+    <ProjectReference Include="..\SSO.Infra.AppConfiguration\SSO.Infra.AppConfiguration.csproj" />
     <ProjectReference Include="..\SSO.Infra.Data\SSO.Infra.Data.csproj" />
   </ItemGroup>
 

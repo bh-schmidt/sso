@@ -1,4 +1,4 @@
-using SSO.Domain.Models;
+using SSO.Domain.Models.Entities;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -9,7 +9,7 @@ namespace SSO.Infra.Data.Interfaces
         Task Delete(string id);
         Task<IEnumerable<TModel>> GetAll();
         Task<TModel> GetBy(string id);
-        Task Insert(TModel model);
+        Task<TModel> Insert(TModel model);
         Task Replace(TModel model);
     }
 }

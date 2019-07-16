@@ -1,4 +1,4 @@
-using SSO.Domain.Models.Users;
+using SSO.Domain.Models.Entities.Users;
 
 namespace SSO.Infra.Data.Interfaces.Users
 {

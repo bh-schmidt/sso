@@ -1,4 +1,4 @@
-using SSO.Domain.Models.Users;
+using SSO.Domain.Models.Entities.Users;
 using System.Threading.Tasks;
 
 namespace SSO.Domain.Interfaces.Users

@@ -1,6 +1,7 @@
 ﻿using MongoDB.Driver;
-using SSO.Domain.Models;
+using SSO.Domain.Models.Entities;
 using SSO.Infra.Data.Interfaces;
+using SSO.Infra.ServiceLocator;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -11,7 +12,7 @@ namespace SSO.Infra.Data.Repositories
         IBaseCrudRepository<TModel> 
         where TModel : BaseModel
     {
-        protected BaseCrudRepository(string collectionName) : base(collectionName) { }
+        protected BaseCrudRepository(string collectionName, IServiceLocator serviceLocator) : base(collectionName, serviceLocator) { }
 
         public virtual async Task Delete(string id)
         {
@@ -30,9 +31,11 @@ namespace SSO.Infra.Data.Repositories
             return await result.FirstOrDefaultAsync();
         }
 
-        public virtual async Task Insert(TModel model)
+        public virtual async Task<TModel> Insert(TModel model)
         {
             await collection.InsertOneAsync(model);
+
+            return model;
         }
 
         public virtual async Task Replace(TModel model)

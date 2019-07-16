@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using SSO.Infra.AppConfiguration;
 
 namespace Api
 {
@@ -18,6 +19,8 @@ namespace Api
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+
+            AppSettings.Configure(configuration);
         }
 
         public IConfiguration Configuration { get; }
@@ -41,7 +44,7 @@ namespace Api
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseMvc();
         }
     }

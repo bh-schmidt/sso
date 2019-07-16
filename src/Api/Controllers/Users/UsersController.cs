@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SSO.Domain.Interfaces.Users;
-using SSO.Domain.Models.Users;
+using SSO.Domain.Models.Entities.Users;
 using SSO.Infra.ServiceLocator;
 using System.Threading.Tasks;
 
