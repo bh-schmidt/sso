@@ -1,5 +1,6 @@
 ﻿using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
+using SSO.Infra.Helpers.Extensions;
 using SSO.Infra.ServiceLocator;
 using System;
 using System.Linq;
@@ -20,6 +21,11 @@ namespace Api.Controllers
 
         protected virtual IActionResult CreateResponse(ValidationResult validationResult)
         {
+            if (validationResult.IsNull())
+            {
+                return StatusCode(HttpStatusCode.InternalServerError.GetHashCode());
+            }
+
             if (validationResult.IsValid)
             {
                 return StatusCode(HttpStatusCode.OK.GetHashCode());

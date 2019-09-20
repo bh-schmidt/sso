@@ -1,6 +1,4 @@
-﻿using SSO.Domain.Models.Contracts.Users;
-
-namespace SSO.Domain.Models.Entities.Users
+﻿namespace SSO.Domain.Models.Users
 {
     public class User : BaseModel
     {

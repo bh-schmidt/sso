@@ -1,5 +1,5 @@
 using NUnit.Framework;
-using SSO.Domain.Models.Entities.Users;
+using SSO.Domain.Models.Users;
 using SSO.Tests.Shared;
 using SSO.Tests.Shared.Helpers.ExtensionMethods;
 

@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using FluentValidation.Results;
 
-namespace SSO.Domain.Models.Entities
+namespace SSO.Domain.Models
 {
     public class BaseModel
     {

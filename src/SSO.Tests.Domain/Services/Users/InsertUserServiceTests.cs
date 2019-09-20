@@ -1,9 +1,8 @@
 ﻿using Moq;
 using NUnit.Framework;
-using SSO.Domain.Models.Entities.Users;
+using SSO.Domain.Models.Users;
 using SSO.Domain.Services.Users;
-using SSO.Infra.Data.Interfaces.Users;
-using SSO.Infra.ServiceLocator;
+using SSO.Infra.Data.Repositories.Users;
 using SSO.Tests.Shared;
 using SSO.Tests.Shared.Helpers.ExtensionMethods;
 

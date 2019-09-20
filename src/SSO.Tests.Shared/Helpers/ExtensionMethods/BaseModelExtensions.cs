@@ -1,4 +1,4 @@
-﻿using SSO.Domain.Models.Entities;
+﻿using SSO.Domain.Models;
 using System.Linq;
 
 namespace SSO.Tests.Shared.Helpers.ExtensionMethods

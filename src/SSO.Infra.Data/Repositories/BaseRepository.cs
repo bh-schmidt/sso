@@ -1,5 +1,5 @@
 ﻿using MongoDB.Driver;
-using SSO.Domain.Models.Entities;
+using SSO.Domain.Models;
 using SSO.Infra.AppConfiguration;
 using SSO.Infra.ServiceLocator;
 

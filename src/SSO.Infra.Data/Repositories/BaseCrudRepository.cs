@@ -1,6 +1,5 @@
 ﻿using MongoDB.Driver;
-using SSO.Domain.Models.Entities;
-using SSO.Infra.Data.Interfaces;
+using SSO.Domain.Models;
 using SSO.Infra.ServiceLocator;
 using System.Collections.Generic;
 using System.Threading.Tasks;

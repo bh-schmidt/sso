@@ -1,13 +1,19 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using SSO.Infra.Helpers.Extensions;
 using System.Net;
 
 namespace Api.Attributes
 {
-    public class ExceptionFilter : ExceptionFilterAttribute
+    public class ExceptionAttribute : ExceptionFilterAttribute
     {
         public override void OnException(ExceptionContext context)
         {
+            if (context.IsNull())
+            {
+                return;
+            }
+
             context.Result = CreateExceptionResponse(context);
         }
 

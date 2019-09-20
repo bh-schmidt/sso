@@ -1,6 +1,5 @@
-﻿using SSO.Domain.Interfaces.Users;
-using SSO.Domain.Models.Entities.Users;
-using SSO.Infra.Data.Interfaces.Users;
+﻿using SSO.Domain.Models.Users;
+using SSO.Infra.Data.Repositories.Users;
 using SSO.Infra.Helpers.Extensions;
 using SSO.Infra.ServiceLocator;
 using System.Threading.Tasks;

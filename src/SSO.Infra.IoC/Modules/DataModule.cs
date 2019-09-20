@@ -1,7 +1,6 @@
 using Autofac;
 using MongoDB.Driver;
 using SSO.Infra.AppConfiguration;
-using SSO.Infra.Data.Interfaces.Users;
 using SSO.Infra.Data.Repositories.Users;
 
 namespace SSO.Infra.IoC.Modules

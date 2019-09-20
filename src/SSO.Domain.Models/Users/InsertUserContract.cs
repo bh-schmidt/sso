@@ -1,7 +1,6 @@
 ﻿using FluentValidation;
-using SSO.Domain.Models.Entities.Users;
 
-namespace SSO.Domain.Models.Contracts.Users
+namespace SSO.Domain.Models.Users
 {
     public class InsertUserContract : AbstractValidator<User>
     {

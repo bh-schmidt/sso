@@ -1,5 +1,4 @@
 using Autofac;
-using SSO.Domain.Interfaces.Users;
 using SSO.Domain.Services.Users;
 
 namespace SSO.Infra.IoC.Modules

@@ -1,6 +1,6 @@
-using SSO.Domain.Models.Entities.Users;
+using SSO.Domain.Models.Users;
 
-namespace SSO.Infra.Data.Interfaces.Users
+namespace SSO.Infra.Data.Repositories.Users
 {
     public interface IUserRepository : IBaseCrudRepository<User>
     {

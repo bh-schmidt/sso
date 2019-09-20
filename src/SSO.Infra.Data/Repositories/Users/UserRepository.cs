@@ -1,4 +1,4 @@
-﻿using SSO.Domain.Models.Entities.Users;
+﻿using SSO.Domain.Models.Users;
 using SSO.Infra.AppConfiguration;
 using SSO.Infra.ServiceLocator;
 
