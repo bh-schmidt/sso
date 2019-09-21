@@ -1,12 +1,12 @@
-﻿using Api.Infra.CrossCutting.Attributes;
-using Api.Infra.CrossCutting.ExtensionMethods;
-using Api.Infra.CrossCutting.IoC.ServiceLocator;
-using FluentValidation.Results;
+﻿using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
+using SSO.Infra.CrossCutting.Attributes;
+using SSO.Infra.CrossCutting.ExtensionMethods;
+using SSO.Infra.CrossCutting.IoC.ServiceLocator;
 using System.Linq;
 using System.Net;
 
-namespace Api.Controllers
+namespace SSO.Controllers
 {
     [SSOExceptionFilter]
     [Route("api/[controller]")]

@@ -6,13 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Autofac" Version="4.9.4" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.4.0" />
+    <PackageReference Include="FluentValidation" Version="8.4.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\SSO.Domain\SSO.Domain.csproj" />
-    <ProjectReference Include="..\SSO.Infra.AppConfiguration\SSO.Infra.AppConfiguration.csproj" />
-    <ProjectReference Include="..\SSO.Infra.ServiceLocator\SSO.Infra.ServiceLocator.csproj" />
+    <PackageReference Include="MongoDB.Driver" Version="2.9.1" />
   </ItemGroup>
 
 </Project>

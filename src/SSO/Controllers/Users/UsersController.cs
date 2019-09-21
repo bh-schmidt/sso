@@ -1,10 +1,10 @@
-﻿using Api.Domain.Users;
-using Api.Domain.Users.InsertUsers;
-using Api.Infra.CrossCutting.IoC.ServiceLocator;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using SSO.Domain.Users;
+using SSO.Domain.Users.InsertUsers;
+using SSO.Infra.CrossCutting.IoC.ServiceLocator;
 using System.Threading.Tasks;
 
-namespace Api.Controllers.Users
+namespace SSO.Controllers.Users
 {
     public class UsersController : BaseController
     {
