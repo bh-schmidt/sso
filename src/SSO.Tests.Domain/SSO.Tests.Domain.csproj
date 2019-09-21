@@ -15,7 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SSO.Domain\SSO.Domain.csproj" />
     <ProjectReference Include="..\SSO.Tests.Shared\SSO.Tests.Shared.csproj" />
   </ItemGroup>
 

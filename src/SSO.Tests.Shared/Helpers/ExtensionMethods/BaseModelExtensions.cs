@@ -1,4 +1,4 @@
-﻿using SSO.Domain.Models;
+﻿using Api.Domain;
 using System.Linq;
 
 namespace SSO.Tests.Shared.Helpers.ExtensionMethods

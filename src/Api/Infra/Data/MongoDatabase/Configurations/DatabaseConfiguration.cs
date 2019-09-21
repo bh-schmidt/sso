@@ -1,6 +1,6 @@
-﻿namespace SSO.Infra.Data.Configurations
+﻿namespace Api.Infra.Data.MongoDatabase.Configurations
 {
-    public static class BsonConfig
+    public static class DatabaseConfiguration
     {
         public static void Configure()
         {

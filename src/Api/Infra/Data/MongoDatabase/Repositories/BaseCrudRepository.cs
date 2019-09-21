@@ -1,10 +1,10 @@
-﻿using MongoDB.Driver;
-using SSO.Domain.Models;
-using SSO.Infra.ServiceLocator;
+﻿using Api.Domain;
+using Api.Infra.CrossCutting.IoC.ServiceLocator;
+using MongoDB.Driver;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace SSO.Infra.Data.Repositories
+namespace Api.Infra.Data.MongoDatabase.Repositories
 {
     public abstract class BaseCrudRepository<TModel> : 
         BaseRepository<TModel>, 

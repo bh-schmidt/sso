@@ -8,10 +8,4 @@
     <PackageReference Include="MongoDB.Driver" Version="2.8.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\SSO.Domain.Models\SSO.Domain.Models.csproj" />
-    <ProjectReference Include="..\SSO.Infra.AppConfiguration\SSO.Infra.AppConfiguration.csproj" />
-    <ProjectReference Include="..\SSO.Infra.ServiceLocator\SSO.Infra.ServiceLocator.csproj" />
-  </ItemGroup>
-
 </Project>

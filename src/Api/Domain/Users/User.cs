@@ -1,4 +1,6 @@
-﻿namespace SSO.Domain.Models.Users
+﻿using Api.Domain.Users.InsertUsers;
+
+namespace Api.Domain.Users
 {
     public class User : BaseModel
     {

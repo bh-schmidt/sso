@@ -1,8 +1,8 @@
-﻿using Moq;
+﻿using Api.Domain.Users;
+using Api.Domain.Users.InsertUsers;
+using Api.Infra.Data.MongoDatabase.Repositories.Users;
+using Moq;
 using NUnit.Framework;
-using SSO.Domain.Models.Users;
-using SSO.Domain.Services.Users;
-using SSO.Infra.Data.Repositories.Users;
 using SSO.Tests.Shared;
 using SSO.Tests.Shared.Helpers.ExtensionMethods;
 

@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Api.Infra.CrossCutting.ExtensionMethods;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using SSO.Infra.Helpers.Extensions;
 using System.Net;
 
 namespace Api.Attributes

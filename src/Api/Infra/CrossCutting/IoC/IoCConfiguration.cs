@@ -1,10 +1,11 @@
+using Api.Infra.CrossCutting.IoC.Modules;
+using Api.Infra.CrossCutting.IoC.ServiceLocator;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
-using SSO.Infra.IoC.Modules;
 using System;
 
-namespace SSO.Infra.IoC
+namespace Api.Infra.CrossCutting.IoC
 {
     public static class IoCConfiguration
     {
@@ -14,10 +15,14 @@ namespace SSO.Infra.IoC
 
             builder.Populate(serviceCollection);
 
+            builder.RegisterType<ServiceLocator.ServiceLocator>().As<IServiceLocator>();
+
             builder.RegisterModule(new DomainModule());
             builder.RegisterModule(new DataModule());
 
             var container = builder.Build();
+
+            ServiceLocator.ServiceLocator.SetContainer(container);
 
             return new AutofacServiceProvider(container);
         }

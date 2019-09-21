@@ -1,6 +1,6 @@
 ﻿using Autofac;
 
-namespace SSO.Infra.ServiceLocator
+namespace Api.Infra.CrossCutting.IoC.ServiceLocator
 {
     public class ServiceLocator : IServiceLocator
     {

@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using SSO.Domain.Models.Users;
-using SSO.Domain.Services.Users;
-using SSO.Infra.ServiceLocator;
+﻿using Api.Domain.Users;
+using Api.Domain.Users.InsertUsers;
+using Api.Infra.CrossCutting.IoC.ServiceLocator;
+using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 namespace Api.Controllers.Users

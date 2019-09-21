@@ -1,10 +1,9 @@
-﻿using SSO.Domain.Models.Users;
-using SSO.Infra.Data.Repositories.Users;
-using SSO.Infra.Helpers.Extensions;
-using SSO.Infra.ServiceLocator;
+﻿using Api.Infra.CrossCutting.ExtensionMethods;
+using Api.Infra.CrossCutting.IoC.ServiceLocator;
+using Api.Infra.Data.MongoDatabase.Repositories.Users;
 using System.Threading.Tasks;
 
-namespace SSO.Domain.Services.Users
+namespace Api.Domain.Users.InsertUsers
 {
     public class InsertUserService : IInsertUserService
     {

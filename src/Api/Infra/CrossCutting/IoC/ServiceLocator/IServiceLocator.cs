@@ -1,4 +1,4 @@
-namespace SSO.Infra.ServiceLocator
+namespace Api.Infra.CrossCutting.IoC.ServiceLocator
 {
     public interface IServiceLocator
     {

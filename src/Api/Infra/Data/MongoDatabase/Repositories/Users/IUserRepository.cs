@@ -1,6 +1,6 @@
-using SSO.Domain.Models.Users;
+using Api.Domain.Users;
 
-namespace SSO.Infra.Data.Repositories.Users
+namespace Api.Infra.Data.MongoDatabase.Repositories.Users
 {
     public interface IUserRepository : IBaseCrudRepository<User>
     {

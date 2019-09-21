@@ -1,9 +1,9 @@
-﻿using MongoDB.Driver;
-using SSO.Domain.Models;
+﻿using Api.Domain;
+using Api.Infra.CrossCutting.IoC.ServiceLocator;
+using MongoDB.Driver;
 using SSO.Infra.AppConfiguration;
-using SSO.Infra.ServiceLocator;
 
-namespace SSO.Infra.Data.Repositories
+namespace Api.Infra.Data.MongoDatabase.Repositories
 {
     public abstract class BaseRepository<TModel> where TModel : BaseModel
     {

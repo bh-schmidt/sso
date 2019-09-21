@@ -15,9 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SSO.Domain.Models\SSO.Domain.Models.csproj" />
-    <ProjectReference Include="..\SSO.Infra.Helpers\SSO.Infra.Helpers.csproj" />
-    <ProjectReference Include="..\SSO.Infra.ServiceLocator\SSO.Infra.ServiceLocator.csproj" />
+    <ProjectReference Include="..\Api\Api.csproj" />
   </ItemGroup>
 
 </Project>

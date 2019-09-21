@@ -1,8 +1,8 @@
+using Api.Infra.CrossCutting.ExtensionMethods;
+using Api.Infra.CrossCutting.IoC.ServiceLocator;
 using FluentValidation;
 using Moq;
 using NUnit.Framework;
-using SSO.Infra.Helpers.Extensions;
-using SSO.Infra.ServiceLocator;
 using System.Diagnostics.CodeAnalysis;
 
 namespace SSO.Tests.Shared

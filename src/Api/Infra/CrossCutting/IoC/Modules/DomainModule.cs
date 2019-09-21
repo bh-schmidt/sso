@@ -1,7 +1,7 @@
+using Api.Domain.Users.InsertUsers;
 using Autofac;
-using SSO.Domain.Services.Users;
 
-namespace SSO.Infra.IoC.Modules
+namespace Api.Infra.CrossCutting.IoC.Modules
 {
     public class DomainModule : Module
     {

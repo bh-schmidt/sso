@@ -1,7 +1,6 @@
-using SSO.Domain.Models.Users;
 using System.Threading.Tasks;
 
-namespace SSO.Domain.Services.Users
+namespace Api.Domain.Users.InsertUsers
 {
     public interface IInsertUserService
     {

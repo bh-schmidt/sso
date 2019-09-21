@@ -1,9 +1,9 @@
+using Api.Infra.Data.MongoDatabase.Repositories.Users;
 using Autofac;
 using MongoDB.Driver;
 using SSO.Infra.AppConfiguration;
-using SSO.Infra.Data.Repositories.Users;
 
-namespace SSO.Infra.IoC.Modules
+namespace Api.Infra.CrossCutting.IoC.Modules
 {
     public class DataModule : Module
     {

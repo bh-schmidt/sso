@@ -1,4 +1,4 @@
-﻿namespace SSO.Infra.Helpers.Extensions
+﻿namespace Api.Infra.CrossCutting.ExtensionMethods
 {
     public static class ObjectExtensions
     {

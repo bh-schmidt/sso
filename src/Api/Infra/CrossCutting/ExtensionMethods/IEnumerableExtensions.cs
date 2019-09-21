@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace SSO.Infra.Helpers.Extensions
+namespace Api.Infra.CrossCutting.ExtensionMethods
 {
     public static class IEnumerableExtensions
     {
