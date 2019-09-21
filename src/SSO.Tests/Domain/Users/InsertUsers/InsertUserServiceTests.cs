@@ -3,8 +3,7 @@ using Api.Domain.Users.InsertUsers;
 using Api.Infra.Data.MongoDatabase.Repositories.Users;
 using Moq;
 using NUnit.Framework;
-using SSO.Tests.Shared;
-using SSO.Tests.Shared.Helpers.ExtensionMethods;
+using SSO.Tests.Shared.ExtensionMethods;
 
 namespace SSO.Tests.Domain.Services.Users
 {

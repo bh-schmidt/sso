@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SSO.Tests.Shared\SSO.Tests.Shared.csproj" />
+    <Folder Include="Services\Users\" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,5 @@
-﻿using Api.Infra.CrossCutting.ExtensionMethods;
+﻿using Api.Infra.CrossCutting.Attributes;
+using Api.Infra.CrossCutting.ExtensionMethods;
 using Api.Infra.CrossCutting.IoC.ServiceLocator;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
@@ -7,6 +8,7 @@ using System.Net;
 
 namespace Api.Controllers
 {
+    [SSOExceptionFilter]
     [Route("api/[controller]")]
     [ApiController]
     public class BaseController : ControllerBase
