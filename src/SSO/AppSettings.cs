@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 
-namespace SSO.Infra.AppConfiguration
+namespace SSO
 {
     public static class AppSettings
     {
