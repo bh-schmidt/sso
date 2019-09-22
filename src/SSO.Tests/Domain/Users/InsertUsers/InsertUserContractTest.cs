@@ -1,5 +1,5 @@
-using Api.Domain.Users;
 using NUnit.Framework;
+using SSO.Domain.Users;
 using SSO.Tests.Shared.ExtensionMethods;
 
 namespace SSO.Tests.Domain.Models.Contracts.Users

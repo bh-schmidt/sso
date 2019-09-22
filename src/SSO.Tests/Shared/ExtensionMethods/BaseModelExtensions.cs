@@ -1,4 +1,4 @@
-﻿using Api.Domain;
+﻿using SSO.Domain;
 using System.Linq;
 
 namespace SSO.Tests.Shared.ExtensionMethods

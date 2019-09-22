@@ -1,8 +1,8 @@
-using Api.Infra.CrossCutting.ExtensionMethods;
-using Api.Infra.CrossCutting.IoC.ServiceLocator;
 using FluentValidation;
 using Moq;
 using NUnit.Framework;
+using SSO.Infra.CrossCutting.ExtensionMethods;
+using SSO.Infra.CrossCutting.IoC.ServiceLocator;
 using System.Diagnostics.CodeAnalysis;
 
 namespace SSO.Tests
@@ -30,7 +30,7 @@ namespace SSO.Tests
                 ResetServiceLocator();
             }
 
-            if (mock.IsNotNull())
+            if (!mock.IsNull())
             {
                 serviceLocatorMock.Setup(x => x.Resolve<T>()).Returns(mock.Object);
             }
