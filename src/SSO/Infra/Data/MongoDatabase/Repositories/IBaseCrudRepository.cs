@@ -8,7 +8,7 @@ namespace SSO.Infra.Data.MongoDatabase.Repositories
     {
         Task Delete(string id);
         Task<IEnumerable<TModel>> GetAll();
-        Task<TModel> GetBy(string id);
+        Task<IEnumerable<TModel>> GetBy(string id);
         Task<TModel> Insert(TModel model);
         Task Replace(TModel model);
     }

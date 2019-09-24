@@ -1,5 +1,9 @@
 ﻿using FluentValidation;
 using FluentValidation.Results;
+using SSO.Infra.CrossCutting.ExtensionMethods;
+using SSO.Infra.CrossCutting.IoC.ServiceLocator;
+using System;
+using System.Threading.Tasks;
 
 namespace SSO.Domain
 {
@@ -7,7 +11,6 @@ namespace SSO.Domain
     {
         public string Id { get; set; }
         public bool Valid => ValidationResult.IsValid;
-        public bool Invalid => !Valid;
         public ValidationResult ValidationResult { get; private set; }
 
         public BaseModel()
@@ -15,9 +18,26 @@ namespace SSO.Domain
             ValidationResult = new ValidationResult();
         }
 
-        protected virtual void Validate<TModel>(TModel model, AbstractValidator<TModel> validator)
+        public virtual void Validate<TValidator>(IServiceLocator serviceLocator) where TValidator : IValidator
         {
-            ValidationResult =  validator.Validate(model);
+            if (serviceLocator.IsNull())
+            {
+                throw new ArgumentNullException(nameof(serviceLocator));
+            }
+
+            var validator = serviceLocator.Resolve<TValidator>();
+            ValidationResult = validator.Validate(this);
+        }
+
+        public virtual async Task ValidateAsync<TValidator>(IServiceLocator serviceLocator) where TValidator : IValidator
+        {
+            if (serviceLocator.IsNull())
+            {
+                throw new ArgumentNullException(nameof(serviceLocator));
+            }
+
+            var validator = serviceLocator.Resolve<TValidator>();
+            ValidationResult = await validator.ValidateAsync(this);
         }
     }
 }

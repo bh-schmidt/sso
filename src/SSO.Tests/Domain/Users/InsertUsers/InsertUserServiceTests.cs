@@ -4,12 +4,15 @@ using SSO.Domain.Users;
 using SSO.Domain.Users.InsertUsers;
 using SSO.Infra.Data.MongoDatabase.Repositories.Users;
 using SSO.Tests.Shared.ExtensionMethods;
+using System.Threading;
 
 namespace SSO.Tests.Domain.Services.Users
 {
     public class InsertUserServiceTests : BaseTest
     {
         Mock<IUserRepository> userRepositoryMock;
+        Mock<IUserExistsContract> userExistsContractMock;
+        Mock<IInsertUserContract> insertUserContractMock;
         InsertUserService insertUserService;
 
         [SetUp]
@@ -18,9 +21,14 @@ namespace SSO.Tests.Domain.Services.Users
             ResetServiceLocator();
 
             userRepositoryMock = new Mock<IUserRepository>();
-            AddToServiceLocator(userRepositoryMock);
+            userExistsContractMock = new Mock<IUserExistsContract>();
+            insertUserContractMock = new Mock<IInsertUserContract>();
 
-            insertUserService = new InsertUserService(serviceLocatorMock.Object);
+            AddToServiceLocator(userRepositoryMock);
+            AddToServiceLocator(userExistsContractMock);
+            AddToServiceLocator(insertUserContractMock);
+
+            insertUserService = new InsertUserService(serviceLocator);
         }
 
         [Test]
@@ -33,10 +41,14 @@ namespace SSO.Tests.Domain.Services.Users
                 Password = "passwordABC123!@#"
             };
 
+            insertUserContractMock.Setup(x => x.Validate(It.IsAny<object>())).Returns(ValidValidationResult);
+            userExistsContractMock.Setup(x => x.ValidateAsync(It.IsAny<object>(), It.IsAny<CancellationToken>())).ReturnsAsync(ValidValidationResult);
+
             var insertedUser = insertUserService.Insert(user).Result;
 
             Assert.IsTrue(user.Valid);
             Assert.IsNotNull(user);
+            serviceLocatorMock.Verify(x => x.Resolve<IUserRepository>(), Times.Once);
             userRepositoryMock.Verify(x => x.Insert(It.Is<User>(y => y.Equals(user))), Times.Once);
         }
 
@@ -56,9 +68,11 @@ namespace SSO.Tests.Domain.Services.Users
         {
             var user = new User();
 
+            insertUserContractMock.Setup(x => x.Validate(It.IsAny<object>())).Returns(InvalidValidationResult);
+
             var insertedUser = insertUserService.Insert(user).Result;
 
-            Assert.IsTrue(user.Invalid);
+            Assert.IsTrue(!user.Valid);
             Assert.GreaterOrEqual(user.CountErrors(), 1);
             userRepositoryMock.Verify(x => x.Insert(It.Is<User>(y => y.Equals(user))), Times.Never);
         }

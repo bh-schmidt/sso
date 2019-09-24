@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace SSO.Infra.Data.MongoDatabase.Repositories
 {
-    public abstract class BaseCrudRepository<TModel> : 
-        BaseRepository<TModel>, 
-        IBaseCrudRepository<TModel> 
+    public abstract class BaseCrudRepository<TModel> :
+        BaseRepository<TModel>,
+        IBaseCrudRepository<TModel>
         where TModel : BaseModel
     {
         protected BaseCrudRepository(string collectionName, IServiceLocator serviceLocator) : base(collectionName, serviceLocator) { }
@@ -24,10 +24,10 @@ namespace SSO.Infra.Data.MongoDatabase.Repositories
             return await result.ToListAsync();
         }
 
-        public virtual async Task<TModel> GetBy(string id)
+        public virtual async Task<IEnumerable<TModel>> GetBy(string id)
         {
-            var result = await collection.FindAsync(x => true);
-            return await result.FirstOrDefaultAsync();
+            var result = await collection.FindAsync(x => x.Id == id);
+            return await result.ToListAsync();
         }
 
         public virtual async Task<TModel> Insert(TModel model)

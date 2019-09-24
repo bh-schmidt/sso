@@ -16,7 +16,6 @@ namespace SSO.Infra.Data.MongoDatabase.Configurations
                 m.MapMember(x => x.Id)
                     .SetSerializer(new StringSerializer(BsonType.ObjectId))
                     .SetIdGenerator(StringObjectIdGenerator.Instance);
-                m.UnmapMember(x => x.Invalid);
                 m.UnmapMember(x => x.Valid);
                 m.UnmapMember(x => x.ValidationResult);
             });

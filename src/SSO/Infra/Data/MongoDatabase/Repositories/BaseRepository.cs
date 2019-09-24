@@ -1,6 +1,10 @@
 ﻿using MongoDB.Driver;
 using SSO.Domain;
+using SSO.Infra.CrossCutting.ExtensionMethods;
 using SSO.Infra.CrossCutting.IoC.ServiceLocator;
+using System;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace SSO.Infra.Data.MongoDatabase.Repositories
 {
@@ -15,6 +19,13 @@ namespace SSO.Infra.Data.MongoDatabase.Repositories
             mongoClient = serviceLocator.Resolve<IMongoClient>();
             mongoDatabase = mongoClient.GetDatabase(AppSettings.UserCollectionName);
             collection = mongoDatabase.GetCollection<TModel>(collectionName);
+        }
+
+        protected async Task<bool> Exists(Expression<Func<TModel, bool>> filter)
+        {
+            var occurrences = await collection.CountDocumentsAsync(filter, new CountOptions() { Limit = 1 });
+
+            return !occurrences.IsZero();
         }
     }
 }

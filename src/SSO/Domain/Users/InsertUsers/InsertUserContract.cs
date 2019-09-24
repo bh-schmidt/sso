@@ -2,7 +2,7 @@
 
 namespace SSO.Domain.Users.InsertUsers
 {
-    public class InsertUserContract : AbstractValidator<User>
+    public class InsertUserContract : AbstractValidator<User>, IInsertUserContract
     {
         public InsertUserContract()
         {
