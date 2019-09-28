@@ -1,10 +1,9 @@
-﻿using Castle.Core.Internal;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using SSO.Infra.CrossCutting.Cryptography;
 
-namespace SSO.Tests.Infra.CrossCutting.Cryptography
+namespace SSO.Tests.Infra.CrossCutting.Cryptography.PasswordCryptographyTests
 {
-    public class PasswordCryptographyTests : BaseTest
+    public class EncryptPasswordTests : BaseTest
     {
         PasswordCryptography passwordCryptography;
 
@@ -15,21 +14,7 @@ namespace SSO.Tests.Infra.CrossCutting.Cryptography
         }
 
         [Test]
-        public void GenerateRandomSaltShouldReturnByteArray()
-        {
-            var bytes = passwordCryptography.GenerateRandomSalt(64);
-            Assert.IsFalse(bytes.IsNullOrEmpty());
-        }
-
-        [Test]
-        public void GenerateRandomSaltShouldReturnNull()
-        {
-            var bytes = passwordCryptography.GenerateRandomSalt(0);
-            Assert.IsNull(bytes);
-        }
-
-        [Test]
-        public void EncryptPasswordShouldReturnEncryptedPassword()
+        public void WillReturnEncryptedPassword()
         {
             var salt = new byte[8] { 1, 21, 68, 74, 68, 26, 48, 255 };
             var password = "123456789";
@@ -41,7 +26,7 @@ namespace SSO.Tests.Infra.CrossCutting.Cryptography
         }
 
         [Test]
-        public void EncryptPasswordShouldReturnNullBecauseSaltIsNull()
+        public void WillReturnNullBecauseSaltIsNull()
         {
             byte[] salt = null;
             var password = "123456789";
@@ -52,7 +37,7 @@ namespace SSO.Tests.Infra.CrossCutting.Cryptography
         }
 
         [Test]
-        public void EncryptPasswordShouldReturnNullBecausePasswordIsNull()
+        public void WillReturnNullBecausePasswordIsNull()
         {
             var salt = new byte[8] { 1, 21, 68, 74, 68, 26, 48, 255 };
             string password = null;

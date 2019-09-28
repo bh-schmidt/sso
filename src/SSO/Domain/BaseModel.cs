@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SSO.Domain
 {
-    public class BaseModel
+    public abstract class BaseModel
     {
         public string Id { get; set; }
         public bool Valid => ValidationResult.IsValid;

@@ -1,11 +1,11 @@
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using SSO.Domain.Users;
 using SSO.Domain.Users.InsertUsers;
 using SSO.Tests.Shared.ExtensionMethods;
 
-namespace SSO.Tests.Domain.Models.Contracts.Users
+namespace SSO.Tests.Domain.Users.InsertUsers.InsertUserContractTests
 {
-    public class InsertUserContractTest : BaseTest
+    public class ValidateTests : BaseTest
     {
         [SetUp]
         public void Setup()

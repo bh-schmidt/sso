@@ -6,9 +6,9 @@ using SSO.Infra.Data.MongoDatabase.Repositories.Users;
 using SSO.Tests.Shared.ExtensionMethods;
 using System.Threading.Tasks;
 
-namespace SSO.Tests.Domain.Users.InsertUsers
+namespace SSO.Tests.Domain.Users.InsertUsers.UserExistsContractTests
 {
-    public class UserExistsContractTests : BaseTest
+    public class ValidateAsyncTests : BaseTest
     {
         Mock<IUserRepository> userRepositoryMock;
 
