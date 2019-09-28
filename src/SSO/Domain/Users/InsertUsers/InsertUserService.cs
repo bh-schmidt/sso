@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+using SSO.Infra.CrossCutting.Cryptography;
 using SSO.Infra.CrossCutting.ExtensionMethods;
 using SSO.Infra.CrossCutting.IoC.ServiceLocator;
 using SSO.Infra.Data.MongoDatabase.Repositories.Users;
@@ -19,44 +20,35 @@ namespace SSO.Domain.Users.InsertUsers
 
         public async Task<User> Insert(User user)
         {
-            user?.Validate<IInsertUserContract>(serviceLocator);
-
-            if (user.IsNullOrInvalid())
+            if (!await IsValid(user))
             {
                 return user;
             }
 
-            await user.ValidateAsync<IUserExistsContract>(serviceLocator);
-
-            if (!user.Valid)
-            {
-                return user;
-            }
-
-            var salt = GenerateSalt();
+            var cryptography = serviceLocator.Resolve<IPasswordCryptography>();
+            var salt = cryptography.GenerateRandomSalt(64);
 
             user.Salt = Convert.ToBase64String(salt);
-            user.Password = CryptPassword(salt, user.Password);
+            user.Password = cryptography.EncryptPassword(user.Password, salt);
 
             var userRepository = serviceLocator.Resolve<IUserRepository>();
-
             var insertedUser = await userRepository.Insert(user);
 
             return insertedUser;
         }
 
-        public string CryptPassword(byte[] salt, string password)
+        private async Task<bool> IsValid(User user)
         {
-            var hash = KeyDerivation.Pbkdf2(password, salt, KeyDerivationPrf.HMACSHA1, 9573, 512 / 8);
+            user?.Validate<IInsertUserContract>(serviceLocator);
 
-            return Convert.ToBase64String(hash);
-        }
+            if (user.IsNullOrInvalid())
+            {
+                return false;
+            }
 
-        public byte[] GenerateSalt()
-        {
-            byte[] salt = new byte[256 / 8];
-            RandomNumberGenerator.Create().GetBytes(salt);
-            return salt;
+            await user.ValidateAsync<IUserExistsContract>(serviceLocator);
+
+            return user.Valid;
         }
     }
 }

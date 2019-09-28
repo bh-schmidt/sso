@@ -10,8 +10,6 @@ namespace SSO.Domain.Users.InsertUsers
 {
     public class UserExistsContract : AbstractValidator<User>, IUserExistsContract
     {
-        private IServiceLocator serviceLocator;
-
         public UserExistsContract(IServiceLocator serviceLocator)
         {
             if (serviceLocator.IsNull())
@@ -19,31 +17,17 @@ namespace SSO.Domain.Users.InsertUsers
                 throw new ArgumentNullException(nameof(serviceLocator));
             }
 
-            this.serviceLocator = serviceLocator;
+            var userRepository = serviceLocator.Resolve<IUserRepository>();
 
             RuleFor(x => x.Email)
                 .NotEmpty()
-                .MustAsync(EmailNotExists)
+                .MustAsync(async (email, _) => !await userRepository.EmailExists(email))
                 .WithMessage("This email already exists.");
 
             RuleFor(x => x.Username)
                 .NotEmpty()
-                .MustAsync(UsernameNotExists)
+                .MustAsync(async (username, _) => !await userRepository.UsernameExists(username))
                 .WithMessage("This username already exists.");
-        }
-
-        public async Task<bool> EmailNotExists(string email, CancellationToken _)
-        {
-            var userRepository = serviceLocator.Resolve<IUserRepository>();
-
-            return !await userRepository.EmailExists(email);
-        }
-
-        public async Task<bool> UsernameNotExists(string username, CancellationToken _)
-        {
-            var userRepository = serviceLocator.Resolve<IUserRepository>();
-
-            return !await userRepository.UsernameExists(username);
         }
     }
 }
