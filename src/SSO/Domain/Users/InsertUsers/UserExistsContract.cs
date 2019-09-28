@@ -3,8 +3,6 @@ using SSO.Infra.CrossCutting.ExtensionMethods;
 using SSO.Infra.CrossCutting.IoC.ServiceLocator;
 using SSO.Infra.Data.MongoDatabase.Repositories.Users;
 using System;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace SSO.Domain.Users.InsertUsers
 {

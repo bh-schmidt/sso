@@ -9,13 +9,13 @@ using System.Threading;
 
 namespace SSO.Tests.Domain.Services.Users
 {
-    public class InsertUserServiceTests : BaseTest
+    public class InsertUserTests : BaseTest
     {
         Mock<IUserRepository> userRepositoryMock;
         Mock<IUserExistsContract> userExistsContractMock;
         Mock<IInsertUserContract> insertUserContractMock;
         Mock<IPasswordCryptography> passwordCryptographyMock;
-        InsertUserService insertUserService;
+        InsertUser insertUser;
 
         [SetUp]
         public void Setup()
@@ -32,7 +32,7 @@ namespace SSO.Tests.Domain.Services.Users
             AddToServiceLocator(insertUserContractMock);
             AddToServiceLocator(passwordCryptographyMock);
 
-            insertUserService = new InsertUserService(serviceLocator);
+            insertUser = new InsertUser(serviceLocator);
         }
 
         [Test]
@@ -52,14 +52,14 @@ namespace SSO.Tests.Domain.Services.Users
             passwordCryptographyMock.Setup(x => x.GenerateRandomSalt(It.IsAny<int>())).Returns(salt);
             passwordCryptographyMock.Setup(x => x.EncryptPassword(user.Password, salt)).Returns("987654321");
 
-            var insertedUser = insertUserService.Insert(user).Result;
-            
+            var insertedUser = insertUser.Insert(user).Result;
+
             Assert.IsTrue(user.Valid);
             Assert.IsNotNull(user);
             serviceLocatorMock.Verify(x => x.Resolve<IUserRepository>(), Times.Once);
             userRepositoryMock.Verify(x => x.Insert(It.Is<User>(y => y.Equals(user))), Times.Once);
             passwordCryptographyMock.Verify(x => x.GenerateRandomSalt(It.IsAny<int>()), Times.Once);
-            passwordCryptographyMock.Verify(x => x.EncryptPassword(It.IsAny<string>(),salt), Times.Once);
+            passwordCryptographyMock.Verify(x => x.EncryptPassword(It.IsAny<string>(), salt), Times.Once);
         }
 
         [Test]
@@ -67,7 +67,7 @@ namespace SSO.Tests.Domain.Services.Users
         {
             User user = null;
 
-            var insertedUser = insertUserService.Insert(user).Result;
+            var insertedUser = insertUser.Insert(user).Result;
 
             Assert.IsNull(user);
             userRepositoryMock.Verify(x => x.Insert(It.Is<User>(y => y.Equals(user))), Times.Never);
@@ -80,7 +80,7 @@ namespace SSO.Tests.Domain.Services.Users
 
             insertUserContractMock.Setup(x => x.Validate(It.IsAny<object>())).Returns(InvalidValidationResult);
 
-            var insertedUser = insertUserService.Insert(user).Result;
+            var insertedUser = insertUser.Insert(user).Result;
 
             Assert.IsTrue(!user.Valid);
             Assert.GreaterOrEqual(user.CountErrors(), 1);

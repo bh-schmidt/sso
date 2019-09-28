@@ -29,7 +29,7 @@ namespace SSO.Infra.CrossCutting.Cryptography
 
         public string EncryptPassword(string password, byte[] salt)
         {
-            if(password.IsNullOrWhiteSpace() || salt.IsNull())
+            if (password.IsNullOrWhiteSpace() || salt.IsNull())
             {
                 return null;
             }

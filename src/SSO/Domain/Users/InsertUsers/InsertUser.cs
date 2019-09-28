@@ -1,19 +1,17 @@
-﻿using Microsoft.AspNetCore.Cryptography.KeyDerivation;
-using SSO.Infra.CrossCutting.Cryptography;
+﻿using SSO.Infra.CrossCutting.Cryptography;
 using SSO.Infra.CrossCutting.ExtensionMethods;
 using SSO.Infra.CrossCutting.IoC.ServiceLocator;
 using SSO.Infra.Data.MongoDatabase.Repositories.Users;
 using System;
-using System.Security.Cryptography;
 using System.Threading.Tasks;
 
 namespace SSO.Domain.Users.InsertUsers
 {
-    public class InsertUserService : IInsertUserService
+    public class InsertUser : IInsertUser
     {
         IServiceLocator serviceLocator;
 
-        public InsertUserService(IServiceLocator serviceLocator)
+        public InsertUser(IServiceLocator serviceLocator)
         {
             this.serviceLocator = serviceLocator;
         }

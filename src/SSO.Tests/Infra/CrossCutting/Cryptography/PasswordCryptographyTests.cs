@@ -11,7 +11,7 @@ namespace SSO.Tests.Infra.CrossCutting.Cryptography
         [OneTimeSetUp]
         public void OneTimeSetup()
         {
-            passwordCryptography = new PasswordCryptography();    
+            passwordCryptography = new PasswordCryptography();
         }
 
         [Test]

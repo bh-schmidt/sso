@@ -7,7 +7,7 @@ namespace SSO.Infra.CrossCutting.IoC.Modules
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<InsertUserService>().As<IInsertUserService>();
+            builder.RegisterType<InsertUser>().As<IInsertUser>();
             builder.RegisterType<UserExistsContract>().As<IUserExistsContract>();
             builder.RegisterType<InsertUserContract>().As<IInsertUserContract>();
         }
