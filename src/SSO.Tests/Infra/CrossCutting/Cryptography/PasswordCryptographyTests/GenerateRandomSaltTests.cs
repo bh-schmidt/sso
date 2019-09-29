@@ -3,6 +3,7 @@ using SSO.Infra.CrossCutting.Cryptography;
 using SSO.Infra.CrossCutting.ExtensionMethods;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace SSO.Tests.Infra.CrossCutting.Cryptography.PasswordCryptographyTests
@@ -25,10 +26,11 @@ namespace SSO.Tests.Infra.CrossCutting.Cryptography.PasswordCryptographyTests
         }
 
         [Test]
-        public void WillReturnNull()
+        public void WillReturnEmptyArray()
         {
             var bytes = passwordCryptography.GenerateRandomSalt(0);
-            Assert.IsNull(bytes);
+            Assert.IsNotNull(bytes);
+            Assert.IsFalse(bytes.Any());
         }
     }
 }
