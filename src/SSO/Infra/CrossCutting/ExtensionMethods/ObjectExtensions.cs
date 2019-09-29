@@ -1,10 +1,26 @@
-﻿namespace SSO.Infra.CrossCutting.ExtensionMethods
+﻿using System;
+using Validation;
+
+namespace SSO.Infra.CrossCutting.ExtensionMethods
 {
     public static class ObjectExtensions
     {
-        public static bool IsNull(this object obj)
+        public static bool IsNull([ValidatedNotNull] this object value)
         {
-            return obj == null;
+            return value == null;
+        }
+
+        public static void ThrowIfNull([ValidatedNotNull] this object value, Exception exception)
+        {
+            if(value.IsNull())
+            {
+                throw exception;
+            }
+        }
+
+        public static void ThrowIfNull([ValidatedNotNull] this object value, string attributeName)
+        {
+            ThrowIfNull(value, new ArgumentException(attributeName));
         }
     }
 }

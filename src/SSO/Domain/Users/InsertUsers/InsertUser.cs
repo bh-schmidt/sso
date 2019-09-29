@@ -9,7 +9,7 @@ namespace SSO.Domain.Users.InsertUsers
 {
     public class InsertUser : IInsertUser
     {
-        IServiceLocator serviceLocator;
+        readonly IServiceLocator serviceLocator;
 
         public InsertUser(IServiceLocator serviceLocator)
         {

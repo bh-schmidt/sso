@@ -8,7 +8,7 @@ using System.Net;
 
 namespace SSO.Controllers
 {
-    [SSOExceptionFilter]
+    [SsoExceptionFilterAttribute]
     [Route("api/[controller]")]
     [ApiController]
     public class BaseController : ControllerBase

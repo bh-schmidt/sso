@@ -13,17 +13,14 @@ namespace SSO.Domain
         public bool Valid => ValidationResult.IsValid;
         public ValidationResult ValidationResult { get; private set; }
 
-        public BaseModel()
+        protected BaseModel()
         {
             ValidationResult = new ValidationResult();
         }
 
         public virtual void Validate<TValidator>(IServiceLocator serviceLocator) where TValidator : IValidator
         {
-            if (serviceLocator.IsNull())
-            {
-                throw new ArgumentNullException(nameof(serviceLocator));
-            }
+            serviceLocator.ThrowIfNull(nameof(serviceLocator));
 
             var validator = serviceLocator.Resolve<TValidator>();
             ValidationResult = validator.Validate(this);
@@ -31,10 +28,7 @@ namespace SSO.Domain
 
         public virtual async Task ValidateAsync<TValidator>(IServiceLocator serviceLocator) where TValidator : IValidator
         {
-            if (serviceLocator.IsNull())
-            {
-                throw new ArgumentNullException(nameof(serviceLocator));
-            }
+            serviceLocator.ThrowIfNull(nameof(serviceLocator));
 
             var validator = serviceLocator.Resolve<TValidator>();
             ValidationResult = await validator.ValidateAsync(this);

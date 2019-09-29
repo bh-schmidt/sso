@@ -26,11 +26,7 @@ namespace SSO.Infra.CrossCutting.IoC
 
         public static void AddServiceLocatorTo(ContainerBuilder builder)
         {
-            if (builder.IsNull())
-            {
-                throw new ArgumentException(nameof(builder));
-            }
-
+            builder.ThrowIfNull(nameof(builder));
             builder.RegisterType<ServiceLocator.ServiceLocator>().As<IServiceLocator>();
         }
     }

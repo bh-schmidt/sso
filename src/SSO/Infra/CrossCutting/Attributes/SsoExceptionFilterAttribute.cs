@@ -6,7 +6,7 @@ using System.Net;
 
 namespace SSO.Infra.CrossCutting.Attributes
 {
-    public class SSOExceptionFilter : ExceptionFilterAttribute
+    public class SsoExceptionFilterAttribute : ExceptionFilterAttribute
     {
         private const string ErrorMessage = "An error ocurred while processing the information.";
 

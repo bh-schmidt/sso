@@ -10,10 +10,7 @@ namespace SSO.Domain.Users.InsertUsers
     {
         public UserExistsContract(IServiceLocator serviceLocator)
         {
-            if (serviceLocator.IsNull())
-            {
-                throw new ArgumentNullException(nameof(serviceLocator));
-            }
+            serviceLocator.ThrowIfNull(nameof(serviceLocator));
 
             var userRepository = serviceLocator.Resolve<IUserRepository>();
 

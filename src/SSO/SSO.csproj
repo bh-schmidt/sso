@@ -9,6 +9,7 @@
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.4.0" />
     <PackageReference Include="FluentValidation" Version="8.4.0" />
     <PackageReference Include="MongoDB.Driver" Version="2.9.1" />
+    <PackageReference Include="Validation" Version="2.4.22" />
   </ItemGroup>
 
   <ItemGroup>

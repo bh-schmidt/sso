@@ -14,7 +14,6 @@ namespace SSO
     {
         private const string AppSettingsFile = "appsettings";
         private const string JsonTermination = "json";
-        IConfiguration Configuration;
 
         public Startup(IWebHostEnvironment env)
         {
@@ -24,10 +23,10 @@ namespace SSO
                 .AddJsonFile($"{AppSettingsFile}.{env.EnvironmentName}.{JsonTermination}", false, true)
                 .AddEnvironmentVariables();
 
-            Configuration = builder.Build();
+            var configuration = builder.Build();
 
             DatabaseConfiguration.Configure();
-            AppSettings.Configure(Configuration);
+            AppSettings.Configure(configuration);
             IoCConfiguration.ConfigureServiceLocator();
         }
 

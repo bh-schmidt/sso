@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using SSO.Infra.CrossCutting.ExtensionMethods;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Security.Cryptography;
 
 namespace SSO.Infra.CrossCutting.Cryptography
@@ -14,7 +16,7 @@ namespace SSO.Infra.CrossCutting.Cryptography
         {
             if (byteArraySize.IsZeroOrLess())
             {
-                return null;
+                return Array.Empty<byte>();
             }
 
             byte[] salt = new byte[byteArraySize];

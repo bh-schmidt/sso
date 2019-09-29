@@ -14,20 +14,14 @@ namespace SSO.Infra.Data.MongoDatabase.Repositories.Users
 
         public async Task<bool> EmailExists(string email)
         {
-            if (email.IsNullOrEmpty())
-            {
-                throw new ArgumentException(nameof(email));
-            }
+            email.ThrowIfNullOrEmpty(nameof(email));
 
             return await Exists(x => x.Email == email);
         }
 
         public async Task<bool> UsernameExists(string username)
         {
-            if (username.IsNullOrEmpty())
-            {
-                throw new ArgumentException(nameof(username));
-            }
+            username.ThrowIfNullOrEmpty(nameof(username));
 
             return await Exists(x => x.Username == username);
         }
