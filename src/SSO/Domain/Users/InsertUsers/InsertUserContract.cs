@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using System.Data;
 
 namespace SSO.Domain.Users.InsertUsers
 {
@@ -10,26 +11,13 @@ namespace SSO.Domain.Users.InsertUsers
                 .Empty();
 
             RuleFor(x => x.Email)
-                .NotEmpty()
-                .EmailAddress();
+                .ValidateEmail();
 
             RuleFor(x => x.Username)
-                .NotEmpty()
-                .MinimumLength(6)
-                .MaximumLength(20);
+                .ValidateUsername();
 
             RuleFor(x => x.Password)
-                .NotEmpty()
-                .MinimumLength(8)
-                .MaximumLength(30)
-                .Matches(@"[a-z]")
-                .WithMessage("The password needs at least 1 lower case letter.")
-                .Matches(@"[A-Z]")
-                .WithMessage("The password needs at least 1 upper case letter.")
-                .Matches(@"[\d]")
-                .WithMessage("The password needs at least 1 numeric digit.")
-                .Matches(@"[\W]")
-                .WithMessage("The password needs at least 1 special character.");
+                .ValidatePassword();
         }
     }
 }

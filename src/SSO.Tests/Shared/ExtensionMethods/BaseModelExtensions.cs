@@ -15,10 +15,5 @@ namespace SSO.Tests.Shared.ExtensionMethods
         {
             return baseModel.ValidationResult.Errors.Any(x => x.ErrorMessage == message);
         }
-
-        public static bool HasError(this BaseModel baseModel, string code, string message)
-        {
-            return baseModel.ValidationResult.Errors.Any(x => x.ErrorMessage == message && x.ErrorCode == code);
-        }
     }
 }
