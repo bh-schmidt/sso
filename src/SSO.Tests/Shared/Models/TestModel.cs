@@ -1,12 +1,8 @@
-﻿namespace SSO.Tests.Shared.Models
-{
-    public class TestModel<TProperty>
-    {
-        public TestModel(TProperty property)
-        {
-            Property = property;
-        }
+﻿using SSO.Domain;
 
-        public TProperty Property { get; set; }
+namespace SSO.Tests.Shared.Models
+{
+    public class TestModel : BaseModel
+    {
     }
 }

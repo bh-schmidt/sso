@@ -1,294 +1,81 @@
-﻿using NUnit.Framework;
+﻿using Moq;
+using NUnit.Framework;
+using SSO.Domain;
 using SSO.Domain.Users;
 using SSO.Domain.Users.InsertUsers;
 using SSO.Tests.Shared.ExtensionMethods;
+using System;
 
 namespace SSO.Tests.Domain.Users.InsertUsers.InsertUserContractTests
 {
     public class ValidateTests : BaseTest
     {
+        Mock<IUserRules> userRulesMock;
+        Mock<IBaseModelRules> baseModelRulesMock;
+
         [SetUp]
         public void Setup()
         {
             ResetServiceLocator();
-
-            AddToServiceLocator<IInsertUserContract>(new InsertUserContract());
         }
 
         [Test]
-        public void WillReturnValidUser()
+        public void WillAddRulesToContract()
         {
-            var user = new User()
-            {
-                Email = "user@domain.com",
-                Username = "user123",
-                Password = "passwordABC123!@#"
-            };
+            userRulesMock = new Mock<IUserRules>();
+            baseModelRulesMock = new Mock<IBaseModelRules>();
 
-            user.Validate<IInsertUserContract>(serviceLocator);
+            AddToServiceLocator(userRulesMock.Object);
+            AddToServiceLocator(baseModelRulesMock.Object);
 
-            Assert.True(user.Valid);
-            Assert.Zero(user.CountErrors());
+            new InsertUserContract(serviceLocator);
+
+            baseModelRulesMock.Verify(x => x.ValidateIdToInsert(It.IsAny<FluentValidation.IRuleBuilder<User, string>>()), Times.Once);
+            userRulesMock.Verify(x => x.ValidateEmail(It.IsAny<FluentValidation.IRuleBuilder<User, string>>()), Times.Once);
+            userRulesMock.Verify(x => x.ValidateUsername(It.IsAny<FluentValidation.IRuleBuilder<User, string>>()), Times.Once);
+            userRulesMock.Verify(x => x.ValidatePassword(It.IsAny<FluentValidation.IRuleBuilder<User, string>>()), Times.Once);
         }
 
         [Test]
-        public void WillReturnIdNotEmpty()
+        public void WillThrowBaseModelRulesNull()
         {
-            var user = new User()
+            baseModelRulesMock = new Mock<IBaseModelRules>();
+            userRulesMock = new Mock<IUserRules>();
+
+            AddToServiceLocator(userRulesMock.Object);
+
+            var exception = Assert.Catch(() =>
             {
-                Id = "123",
-                Email = "user@domain.com",
-                Username = "user123",
-                Password = "passwordABC123!@#"
-            };
+                new InsertUserContract(serviceLocator);
+            });
 
-            user.Validate<IInsertUserContract>(serviceLocator);
-
-            Assert.True(!user.Valid);
-            Assert.True(user.HasError("'Id' must be empty."));
+            Assert.IsInstanceOf<ArgumentNullException>(exception);
+            Assert.AreEqual("Value cannot be null. (Parameter 'baseModelRules')", exception.Message);
+            baseModelRulesMock.Verify(x => x.ValidateIdToInsert(It.IsAny<FluentValidation.IRuleBuilder<User, string>>()), Times.Never);
+            userRulesMock.Verify(x => x.ValidateEmail(It.IsAny<FluentValidation.IRuleBuilder<User, string>>()), Times.Never);
+            userRulesMock.Verify(x => x.ValidateUsername(It.IsAny<FluentValidation.IRuleBuilder<User, string>>()), Times.Never);
+            userRulesMock.Verify(x => x.ValidatePassword(It.IsAny<FluentValidation.IRuleBuilder<User, string>>()), Times.Never);
         }
 
         [Test]
-        public void WillReturnEmailNull()
+        public void WillThrowUserRulesNull()
         {
-            var user = new User()
+            baseModelRulesMock = new Mock<IBaseModelRules>();
+            userRulesMock = new Mock<IUserRules>();
+
+            AddToServiceLocator(baseModelRulesMock.Object);
+
+            var exception = Assert.Catch(() =>
             {
-                Email = null,
-                Username = "user123",
-                Password = "passwordABC123!@#"
-            };
+                new InsertUserContract(serviceLocator);
+            });
 
-            user.Validate<IInsertUserContract>(serviceLocator);
-
-            Assert.True(!user.Valid);
-            Assert.True(user.HasError("'Email' must not be empty."));
-        }
-
-        [Test]
-        public void WillReturnEmailEmpty()
-        {
-            var user = new User()
-            {
-                Email = "",
-                Username = "user123",
-                Password = "passwordABC123!@#"
-            };
-
-            user.Validate<IInsertUserContract>(serviceLocator);
-
-            Assert.True(!user.Valid);
-            Assert.True(user.HasError("'Email' must not be empty."));
-        }
-
-        [Test]
-        public void WillReturnEmailInvalid()
-        {
-            var user = new User()
-            {
-                Email = "email@",
-                Username = "user123",
-                Password = "passwordABC123!@#"
-            };
-
-            user.Validate<IInsertUserContract>(serviceLocator);
-
-            Assert.True(!user.Valid);
-            Assert.True(user.HasError("'Email' is not a valid email address."));
-        }
-
-        [Test]
-        public void WillReturnUsernameNull()
-        {
-            var user = new User()
-            {
-                Email = "user@domain.com",
-                Username = null,
-                Password = "passwordABC123!@#"
-            };
-
-            user.Validate<IInsertUserContract>(serviceLocator);
-
-            Assert.True(!user.Valid);
-            Assert.True(user.HasError("'Username' must not be empty."));
-        }
-
-        [Test]
-        public void WillReturnUsernameEmpty()
-        {
-            var user = new User()
-            {
-                Email = "user@domain.com",
-                Username = "",
-                Password = "passwordABC123!@#"
-            };
-
-            user.Validate<IInsertUserContract>(serviceLocator);
-
-            Assert.True(!user.Valid);
-            Assert.True(user.HasError("'Username' must not be empty."));
-        }
-
-        [Test]
-        public void WillReturnUsernameMustBeAtLeast6Characters()
-        {
-            var user = new User()
-            {
-                Email = "user@domain.com",
-                Username = "user",
-                Password = "passwordABC123!@#"
-            };
-
-            user.Validate<IInsertUserContract>(serviceLocator);
-
-            Assert.True(!user.Valid);
-            Assert.True(user.HasError("The length of 'Username' must be at least 6 characters. You entered 4 characters."));
-        }
-
-        [Test]
-        public void WillReturnUsernameMustBe20CharactersOrFewer()
-        {
-            var user = new User()
-            {
-                Email = "user@domain.com",
-                Username = "user12345678912345678",
-                Password = "passwordABC123!@#"
-            };
-
-            user.Validate<IInsertUserContract>(serviceLocator);
-
-            Assert.True(!user.Valid);
-            Assert.True(user.HasError("The length of 'Username' must be 20 characters or fewer. You entered 21 characters."));
-        }
-
-        [Test]
-        public void WillReturnPasswordNull()
-        {
-            var user = new User()
-            {
-                Email = "user@domain.com",
-                Username = "user123",
-                Password = null
-            };
-
-            user.Validate<IInsertUserContract>(serviceLocator);
-
-            Assert.True(!user.Valid);
-            Assert.GreaterOrEqual(user.CountErrors(), 1);
-            Assert.IsTrue(user.HasError("'Password' must not be empty."));
-        }
-
-        [Test]
-        public void WillReturnPasswordEmpty()
-        {
-            var user = new User()
-            {
-                Email = "user@domain.com",
-                Username = "user123",
-                Password = ""
-            };
-
-            user.Validate<IInsertUserContract>(serviceLocator);
-
-            Assert.True(!user.Valid);
-            Assert.GreaterOrEqual(user.CountErrors(), 1);
-            Assert.IsTrue(user.HasError("'Password' must not be empty."));
-        }
-
-        public void WillReturnPasswordMustBeAtLeast8Characters()
-        {
-            var user = new User()
-            {
-                Email = "user@domain.com",
-                Username = "user123",
-                Password = "1234567"
-            };
-
-            user.Validate<IInsertUserContract>(serviceLocator);
-
-            Assert.True(!user.Valid);
-            Assert.GreaterOrEqual(user.CountErrors(), 1);
-            Assert.GreaterOrEqual(user.CountErrors(), 1);
-            Assert.IsTrue(user.HasError("The length of 'Password' must be at least 8 characters. You entered 7 characters."));
-        }
-
-        public void WillReturnPasswordMustBe30CharactersOrFewer()
-        {
-            var user = new User()
-            {
-                Email = "user@domain.com",
-                Username = "user123",
-                Password = "1234567891234567891234567891234"
-            };
-
-            user.Validate<IInsertUserContract>(serviceLocator);
-
-            Assert.True(!user.Valid);
-            Assert.GreaterOrEqual(user.CountErrors(), 1);
-            Assert.IsTrue(user.HasError("The length of 'Password' must be 30 characters or fewer. You entered 31 characters."));
-        }
-
-        public void WillReturnPasswordNeedsAtLeastOneLowerCaseLetter()
-        {
-            var user = new User()
-            {
-                Email = "user@domain.com",
-                Username = "user123",
-                Password = "ABC123!@#"
-            };
-
-            user.Validate<IInsertUserContract>(serviceLocator);
-
-            Assert.True(!user.Valid);
-            Assert.GreaterOrEqual(user.CountErrors(), 1);
-            Assert.IsTrue(user.HasError("The password needs at least 1 lower case letter."));
-        }
-
-        public void WillReturnPasswordNeedsAtLeastOneUpperCaseLetter()
-        {
-            var user = new User()
-            {
-                Email = "user@domain.com",
-                Username = "user123",
-                Password = "password123!@#"
-            };
-
-            user.Validate<IInsertUserContract>(serviceLocator);
-
-            Assert.True(!user.Valid);
-            Assert.GreaterOrEqual(user.CountErrors(), 1);
-            Assert.IsTrue(user.HasError("The password needs at least 1 upper case letter."));
-        }
-
-        public void WillReturnPasswordNeedsAtLeastOneNumericDigit()
-        {
-            var user = new User()
-            {
-                Email = "user@domain.com",
-                Username = "user123",
-                Password = "passwordABC!@#"
-            };
-
-            user.Validate<IInsertUserContract>(serviceLocator);
-
-            Assert.True(!user.Valid);
-            Assert.GreaterOrEqual(user.CountErrors(), 1);
-            Assert.IsTrue(user.HasError("The password needs at least 1 numeric digit."));
-        }
-
-        public void WillReturnPasswordNeedsAtLeastOneSpecialCharacter()
-        {
-            var user = new User()
-            {
-                Email = "user@domain.com",
-                Username = "user123",
-                Password = "passwordABC123"
-            };
-
-            user.Validate<IInsertUserContract>(serviceLocator);
-
-            Assert.True(!user.Valid);
-            Assert.GreaterOrEqual(user.CountErrors(), 1);
-            Assert.IsTrue(user.HasError("The password needs at least 1 special character."));
+            Assert.IsInstanceOf<ArgumentNullException>(exception);
+            Assert.AreEqual("Value cannot be null. (Parameter 'userRules')", exception.Message);
+            baseModelRulesMock.Verify(x => x.ValidateIdToInsert(It.IsAny<FluentValidation.IRuleBuilder<User, string>>()), Times.Never);
+            userRulesMock.Verify(x => x.ValidateEmail(It.IsAny<FluentValidation.IRuleBuilder<User, string>>()), Times.Never);
+            userRulesMock.Verify(x => x.ValidateUsername(It.IsAny<FluentValidation.IRuleBuilder<User, string>>()), Times.Never);
+            userRulesMock.Verify(x => x.ValidatePassword(It.IsAny<FluentValidation.IRuleBuilder<User, string>>()), Times.Never);
         }
     }
 }

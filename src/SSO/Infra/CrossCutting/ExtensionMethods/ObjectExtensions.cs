@@ -20,7 +20,7 @@ namespace SSO.Infra.CrossCutting.ExtensionMethods
 
         public static void ThrowIfNull([ValidatedNotNull] this object value, string attributeName)
         {
-            ThrowIfNull(value, new ArgumentException(attributeName));
+            ThrowIfNull(value, new ArgumentNullException(attributeName));
         }
     }
 }

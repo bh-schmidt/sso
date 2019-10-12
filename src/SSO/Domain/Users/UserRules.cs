@@ -2,16 +2,16 @@
 
 namespace SSO.Domain.Users
 {
-    public static class UserRules
+    public class UserRules : IUserRules
     {
-        public static IRuleBuilderOptions<T, string> ValidateEmail<T>(this IRuleBuilder<T, string> rule)
+        public IRuleBuilderOptions<User, string> ValidateEmail(IRuleBuilder<User, string> rule)
         {
             return rule
                 .NotEmpty()
                 .EmailAddress();
         }
 
-        public static IRuleBuilderOptions<T, string> ValidateUsername<T>(this IRuleBuilder<T, string> rule)
+        public IRuleBuilderOptions<T, string> ValidateUsername<T>(IRuleBuilder<T, string> rule)
         {
             return rule
                 .NotEmpty()
@@ -19,7 +19,7 @@ namespace SSO.Domain.Users
                 .MaximumLength(20);
         }
 
-        public static IRuleBuilderOptions<T, string> ValidatePassword<T>(this IRuleBuilder<T, string> rule)
+        public IRuleBuilderOptions<T, string> ValidatePassword<T>(IRuleBuilder<T, string> rule)
         {
             return rule
                 .NotEmpty()

@@ -21,4 +21,8 @@
     <ProjectReference Include="..\SSO\SSO.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Shared\Models\NewFolder\" />
+  </ItemGroup>
+
 </Project>

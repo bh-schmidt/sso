@@ -17,7 +17,7 @@ namespace SSO.Infra.Data.MongoDatabase.Repositories
         protected BaseRepository(string collectionName, IServiceLocator serviceLocator)
         {
             mongoClient = serviceLocator.Resolve<IMongoClient>();
-            mongoDatabase = mongoClient.GetDatabase(AppSettings.UserCollectionName);
+            mongoDatabase = mongoClient.GetDatabase(collectionName);
             collection = mongoDatabase.GetCollection<TModel>(collectionName);
         }
 
