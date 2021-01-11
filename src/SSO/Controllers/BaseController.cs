@@ -1,4 +1,5 @@
 ﻿using FluentValidation.Results;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SSO.Infra.CrossCutting.Attributes;
 using SSO.Infra.CrossCutting.ExtensionMethods;
@@ -11,6 +12,7 @@ namespace SSO.Controllers
     [SSOExceptionFilter]
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class BaseController : ControllerBase
     {
         protected IServiceLocator serviceLocator;

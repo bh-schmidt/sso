@@ -14,7 +14,7 @@ namespace SSO.Controllers.Users
 
         [HttpPost]
         [Route("InsertNew")]
-        public async Task<IActionResult> InsertNew(User user)
+        public async Task<IActionResult> InsertNew(User? user)
         {
             var insertUserService = serviceLocator.Resolve<IInsertUserService>();
             var userReturned = await insertUserService.Insert(user);
